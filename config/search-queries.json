@@ -3,61 +3,61 @@
     {
       "id": "1-software-developer-intern",
       "name": "1. Software Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Developer Intern\" OR \"Software Development Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"Software Developer Intern\" OR \"Software Development Internship\" \"Remote\"",
       "enabled": true
     },
     {
       "id": "2-software-engineer-intern",
       "name": "2. Software Engineer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Engineer Intern\" OR \"Software Engineering Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"Software Engineer Intern\" OR \"Software Engineering Internship\" \"Remote\"",
       "enabled": true
     },
     {
       "id": "3-data-analyst-intern",
       "name": "3. Data Analyst Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Data Analyst Intern\" OR \"Data Analytics Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"Data Analyst Intern\" OR \"Data Analytics Internship\" \"Remote\"",
       "enabled": true
     },
     {
       "id": "4-data-engineer-intern",
       "name": "4. Data Engineer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Data Engineer Intern\" OR \"Data Engineering Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"Data Engineer Intern\" OR \"Data Engineering Internship\" \"Remote\"",
       "enabled": true
     },
     {
       "id": "5-full-stack-intern",
       "name": "5. Full Stack Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Full Stack Intern\" OR \"Full-Stack Developer Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"Full Stack Intern\" OR \"Full-Stack Developer Internship\" \"Remote\"",
       "enabled": true
     },
     {
       "id": "6-frontend-intern",
       "name": "6. Frontend Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Frontend Intern\" OR \"Frontend Developer Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"Frontend Intern\" OR \"Frontend Developer Internship\" \"Remote\"",
       "enabled": true
     },
     {
       "id": "7-backend-intern",
       "name": "7. Backend Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Backend Intern\" OR \"Backend Developer Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"Backend Intern\" OR \"Backend Developer Internship\" \"Remote\"",
       "enabled": true
     },
     {
       "id": "8-react-intern",
       "name": "8. React Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"React Intern\" OR \"React Developer Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"React Intern\" OR \"React Developer Internship\" \"Remote\"",
       "enabled": false
     },
     {
       "id": "9-nodejs-intern",
       "name": "9. Node.js Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Node.js Intern\" OR \"Node Developer Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"Node.js Intern\" OR \"Node Developer Internship\" \"Remote\"",
       "enabled": false
     },
     {
       "id": "10-ml-ai-intern",
       "name": "10. Machine Learning / AI Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Machine Learning Intern\" OR \"AI Intern\" OR \"ML Internship\" \"Remote\"",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com OR site:jobs.workable.com OR site:breezy.hr OR site:jobs.smartrecruiters.com OR site:apply.workable.com OR site:myworkdayjobs.com OR site:jobs.jobvite.com \"Machine Learning Intern\" OR \"AI Intern\" OR \"ML Internship\" \"Remote\"",
       "enabled": false
     }
   ],
