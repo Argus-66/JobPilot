@@ -1,20 +1,20 @@
 {
   "personalInfo": {
-    "firstName": "John",
-    "lastName": "Doe",
-    "fullName": "John Doe",
-    "email": "john.doe@example.com",
-    "phone": "+1-234-567-8900",
+    "firstName": "Ayush",
+    "lastName": "H",
+    "fullName": "Ayush h",
+    "email": "jqghebri@gmail.com",
+    "phone": "+91 8688458855",
     "location": {
-      "city": "San Francisco",
-      "state": "CA",
-      "country": "United States",
-      "zipCode": "94102"
+      "city": "Pune",
+      "state": "Maharastra",
+      "country": "India",
+      "zipCode": "411015",
+      "address": "Army Institute of Technology"
     },
-    "linkedin": "https://linkedin.com/in/johndoe",
-    "github": "https://github.com/johndoe",
-    "portfolio": "https://johndoe.com",
-    "website": "https://johndoe.com"
+    "linkedin": "https://www.linkedin.com/in/ayush-h-541948252/",
+    "github": "https://github.com/Argus-66",
+    "portfolio": "https://portfolio-vvng.vercel.app/"
   },
   "workAuthorization": {
     "authorized": true,
