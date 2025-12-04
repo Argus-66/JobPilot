@@ -1,0 +1,57 @@
+{
+  "personalInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "fullName": "John Doe",
+    "email": "john.doe@example.com",
+    "phone": "+1-234-567-8900",
+    "location": {
+      "city": "San Francisco",
+      "state": "CA",
+      "country": "United States",
+      "zipCode": "94102"
+    },
+    "linkedin": "https://linkedin.com/in/johndoe",
+    "github": "https://github.com/johndoe",
+    "portfolio": "https://johndoe.com",
+    "website": "https://johndoe.com"
+  },
+  "workAuthorization": {
+    "authorized": true,
+    "requiresSponsorship": false,
+    "visaStatus": "Citizen"
+  },
+  "availability": {
+    "startDate": "Immediately",
+    "noticePeriod": "2 weeks",
+    "willingToRelocate": true,
+    "remotePreference": "Remote or Hybrid"
+  },
+  "experience": {
+    "yearsOfExperience": 5,
+    "currentCompany": "Tech Corp",
+    "currentTitle": "Software Engineer"
+  },
+  "education": {
+    "degree": "Bachelor of Science",
+    "field": "Computer Science",
+    "university": "University Name",
+    "graduationYear": "2019"
+  },
+  "preferences": {
+    "desiredSalary": "120000",
+    "salaryCurrency": "USD",
+    "jobTypes": ["Full-time"],
+    "workLocations": ["Remote", "Hybrid"]
+  },
+  "demographics": {
+    "gender": "Prefer not to say",
+    "ethnicity": "Prefer not to say",
+    "veteran": "Prefer not to say",
+    "disability": "Prefer not to say"
+  },
+  "additionalInfo": {
+    "coverLetter": "I am excited to apply for this position...",
+    "referralSource": "Job Board"
+  }
+}

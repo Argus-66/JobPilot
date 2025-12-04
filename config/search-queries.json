@@ -1,0 +1,38 @@
+{
+  "queries": [
+    {
+      "id": "software-engineer",
+      "name": "Software Engineer Positions",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Engineer\"",
+      "enabled": true
+    },
+    {
+      "id": "software-developer",
+      "name": "Software Developer Positions",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Developer\"",
+      "enabled": true
+    },
+    {
+      "id": "full-stack",
+      "name": "Full Stack Developer",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Full Stack Developer\" OR \"Full-Stack Engineer\"",
+      "enabled": false
+    },
+    {
+      "id": "frontend",
+      "name": "Frontend Developer",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Frontend Developer\" OR \"Front End Engineer\"",
+      "enabled": false
+    },
+    {
+      "id": "backend",
+      "name": "Backend Developer",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Backend Developer\" OR \"Back End Engineer\"",
+      "enabled": false
+    }
+  ],
+  "settings": {
+    "maxResultsPerQuery": 10,
+    "skipAlreadyApplied": true
+  }
+}

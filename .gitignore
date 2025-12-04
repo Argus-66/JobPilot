@@ -1,0 +1,8 @@
+node_modules/
+.env
+data/resume.pdf
+data/personal-details.json
+logs/*.log
+.playwright/
+screenshots/
+*.log
