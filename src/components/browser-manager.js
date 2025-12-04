@@ -45,9 +45,8 @@ class BrowserManager {
     try {
       logger.info(`Navigating to: ${url}`);
       await this.page.goto(url, { waitUntil: 'domcontentloaded' });
-      await this.page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {
-        logger.warn('Network idle timeout - continuing anyway');
-      });
+      // Small delay instead of networkidle to avoid triggering refreshes
+      await this.page.waitForTimeout(1500);
       return true;
     } catch (error) {
       logger.error(`Navigation failed: ${error.message}`);
@@ -60,9 +59,8 @@ class BrowserManager {
       logger.info(`Opening new tab: ${url}`);
       const newPage = await this.context.newPage();
       await newPage.goto(url, { waitUntil: 'domcontentloaded' });
-      await newPage.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {
-        logger.warn('Network idle timeout - continuing anyway');
-      });
+      // Small delay instead of networkidle to avoid refresh during CAPTCHA solving
+      await newPage.waitForTimeout(1500);
       return newPage;
     } catch (error) {
       logger.error(`Failed to open new tab: ${error.message}`);

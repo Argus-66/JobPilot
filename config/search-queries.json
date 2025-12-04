@@ -1,38 +1,50 @@
 {
   "queries": [
     {
-      "id": "software-engineer",
-      "name": "Software Engineer Positions",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Engineer\"",
+      "id": "software-engineer-intern",
+      "name": "Software Engineer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Engineer Intern\" OR \"Software Engineering Internship\"",
       "enabled": true
     },
     {
-      "id": "software-developer",
-      "name": "Software Developer Positions",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Developer\"",
+      "id": "software-developer-intern",
+      "name": "Software Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Developer Intern\" OR \"Software Development Internship\"",
       "enabled": true
     },
     {
-      "id": "full-stack",
-      "name": "Full Stack Developer",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Full Stack Developer\" OR \"Full-Stack Engineer\"",
+      "id": "full-stack-intern",
+      "name": "Full Stack Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Full Stack Intern\" OR \"Full-Stack Developer Internship\"",
+      "enabled": true
+    },
+    {
+      "id": "frontend-intern",
+      "name": "Frontend Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Frontend Intern\" OR \"Frontend Developer Internship\"",
+      "enabled": true
+    },
+    {
+      "id": "react-intern",
+      "name": "React Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"React Intern\" OR \"React Developer Internship\"",
       "enabled": false
     },
     {
-      "id": "frontend",
-      "name": "Frontend Developer",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Frontend Developer\" OR \"Front End Engineer\"",
-      "enabled": false
-    },
-    {
-      "id": "backend",
-      "name": "Backend Developer",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Backend Developer\" OR \"Back End Engineer\"",
+      "id": "nodejs-intern",
+      "name": "Node.js Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Node.js Intern\" OR \"Node Developer Internship\"",
       "enabled": false
     }
   ],
   "settings": {
     "maxResultsPerQuery": 10,
-    "skipAlreadyApplied": true
+    "skipAlreadyApplied": true,
+    "positionType": "Internship",
+    "targetLocations": ["Remote", "India"],
+    "salaryMinimum": {
+      "India": 20000,
+      "currency": "INR"
+    }
   }
 }

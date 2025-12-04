@@ -12,6 +12,9 @@ const FIELD_MAPPINGS = {
   email: ['email', 'email_address', 'e-mail', 'emailaddress', 'mail'],
   phone: ['phone', 'phone_number', 'phonenumber', 'telephone', 'mobile', 'cell'],
   
+  // Personal Info
+  dateOfBirth: ['date_of_birth', 'dob', 'birth_date', 'birthdate', 'birthday'],
+  
   // Location fields
   city: ['city', 'town', 'locality'],
   state: ['state', 'province', 'region'],

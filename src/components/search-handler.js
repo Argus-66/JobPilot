@@ -18,8 +18,31 @@ class SearchHandler {
       
       logger.info(`Searching: ${searchQuery}`);
       
-      // Wait for results to load
-      await page.waitForSelector('#search', { timeout: 10000 });
+      // Handle Google consent page if it appears
+      try {
+        const acceptButton = await page.$('button:has-text("Accept all")', { timeout: 3000 });
+        if (acceptButton) {
+          await acceptButton.click();
+          logger.info('Accepted Google consent');
+          await page.waitForTimeout(2000);
+        }
+      } catch (e) {
+        // No consent page, continue
+      }
+      
+      // Wait for results to load - try multiple selectors
+      const loaded = await Promise.race([
+        page.waitForSelector('#search', { timeout: 8000 }).then(() => true).catch(() => false),
+        page.waitForSelector('#rso', { timeout: 8000 }).then(() => true).catch(() => false),
+        page.waitForSelector('[data-sokoban-container]', { timeout: 8000 }).then(() => true).catch(() => false)
+      ]);
+      
+      if (!loaded) {
+        logger.warn('Search results took longer to load, continuing anyway...');
+      }
+      
+      // Give it a moment to fully load
+      await page.waitForTimeout(2000);
       
       return true;
     } catch (error) {
@@ -32,23 +55,46 @@ class SearchHandler {
     try {
       const page = this.browserManager.getCurrentPage();
       
-      // Extract search result links
-      const links = await page.$$eval('div#search a[href]', (elements, platforms) => {
-        return elements
-          .map(el => {
-            const href = el.href;
-            const title = el.textContent.trim();
+      // Extract search result links - try multiple selectors
+      let links = [];
+      
+      try {
+        links = await page.$$eval('div#search a[href], div#rso a[href], [data-sokoban-container] a[href]', (elements, platforms) => {
+          return elements
+            .map(el => {
+              const href = el.href;
+              const title = el.textContent.trim();
+              
+              // Check if link is from target platforms
+              const isTargetPlatform = platforms.some(platform => href.includes(platform));
+              
+              if (isTargetPlatform && href && title && title.length > 10) {
+                return { url: href, title };
+              }
+              return null;
+            })
+            .filter(link => link !== null);
+        }, ['jobs.greenhouse.io', 'jobs.lever.co', 'jobs.ashbyhq.com']);
+      } catch (error) {
+        logger.warn(`Could not extract with eval, trying manual approach: ${error.message}`);
+        
+        // Fallback: manual extraction
+        const allLinks = await page.$$('a[href]');
+        for (const link of allLinks) {
+          try {
+            const href = await link.getAttribute('href');
+            const text = await link.textContent();
             
-            // Check if link is from target platforms
-            const isTargetPlatform = platforms.some(platform => href.includes(platform));
-            
-            if (isTargetPlatform && href && title) {
-              return { url: href, title };
+            if (href && (href.includes('jobs.greenhouse.io') || 
+                        href.includes('jobs.lever.co') || 
+                        href.includes('jobs.ashbyhq.com'))) {
+              links.push({ url: href, title: text.trim() });
             }
-            return null;
-          })
-          .filter(link => link !== null);
-      }, ['jobs.greenhouse.io', 'jobs.lever.co', 'jobs.ashbyhq.com']);
+          } catch (e) {
+            continue;
+          }
+        }
+      }
       
       // Remove duplicates
       const uniqueLinks = Array.from(
