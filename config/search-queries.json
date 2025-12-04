@@ -1,44 +1,68 @@
 {
   "queries": [
     {
-      "id": "software-engineer-intern",
-      "name": "Software Engineer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Engineer Intern\" OR \"Software Engineering Internship\"",
+      "id": "1-software-developer-intern",
+      "name": "1. Software Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Developer Intern\" OR \"Software Development Internship\" \"Remote\"",
       "enabled": true
     },
     {
-      "id": "software-developer-intern",
-      "name": "Software Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Developer Intern\" OR \"Software Development Internship\"",
+      "id": "2-software-engineer-intern",
+      "name": "2. Software Engineer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Software Engineer Intern\" OR \"Software Engineering Internship\" \"Remote\"",
       "enabled": true
     },
     {
-      "id": "full-stack-intern",
-      "name": "Full Stack Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Full Stack Intern\" OR \"Full-Stack Developer Internship\"",
+      "id": "3-data-analyst-intern",
+      "name": "3. Data Analyst Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Data Analyst Intern\" OR \"Data Analytics Internship\" \"Remote\"",
       "enabled": true
     },
     {
-      "id": "frontend-intern",
-      "name": "Frontend Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Frontend Intern\" OR \"Frontend Developer Internship\"",
+      "id": "4-data-engineer-intern",
+      "name": "4. Data Engineer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Data Engineer Intern\" OR \"Data Engineering Internship\" \"Remote\"",
       "enabled": true
     },
     {
-      "id": "react-intern",
-      "name": "React Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"React Intern\" OR \"React Developer Internship\"",
+      "id": "5-full-stack-intern",
+      "name": "5. Full Stack Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Full Stack Intern\" OR \"Full-Stack Developer Internship\" \"Remote\"",
+      "enabled": true
+    },
+    {
+      "id": "6-frontend-intern",
+      "name": "6. Frontend Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Frontend Intern\" OR \"Frontend Developer Internship\" \"Remote\"",
+      "enabled": true
+    },
+    {
+      "id": "7-backend-intern",
+      "name": "7. Backend Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Backend Intern\" OR \"Backend Developer Internship\" \"Remote\"",
+      "enabled": true
+    },
+    {
+      "id": "8-react-intern",
+      "name": "8. React Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"React Intern\" OR \"React Developer Internship\" \"Remote\"",
       "enabled": false
     },
     {
-      "id": "nodejs-intern",
-      "name": "Node.js Developer Internship",
-      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Node.js Intern\" OR \"Node Developer Internship\"",
+      "id": "9-nodejs-intern",
+      "name": "9. Node.js Developer Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Node.js Intern\" OR \"Node Developer Internship\" \"Remote\"",
+      "enabled": false
+    },
+    {
+      "id": "10-ml-ai-intern",
+      "name": "10. Machine Learning / AI Internship",
+      "query": "site:jobs.greenhouse.io OR site:jobs.lever.co OR site:jobs.ashbyhq.com \"Machine Learning Intern\" OR \"AI Intern\" OR \"ML Internship\" \"Remote\"",
       "enabled": false
     }
   ],
   "settings": {
-    "maxResultsPerQuery": 10,
+    "maxResultsPerQuery": 100,
     "skipAlreadyApplied": true,
     "positionType": "Internship",
     "targetLocations": ["Remote", "India"],

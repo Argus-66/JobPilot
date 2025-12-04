@@ -30,6 +30,39 @@ class SearchHandler {
         // No consent page, continue
       }
       
+      // Check for CAPTCHA and wait for user to solve it
+      let captchaDetected = true;
+      while (captchaDetected) {
+        const currentUrl = page.url();
+        const pageContent = await page.content();
+        
+        // Check if we're on a CAPTCHA page
+        if (currentUrl.includes('/sorry/') || 
+            pageContent.includes('unusual traffic') ||
+            pageContent.includes('not a robot') ||
+            pageContent.includes('CAPTCHA')) {
+          logger.warn('🤖 CAPTCHA DETECTED - Please solve the CAPTCHA in the browser');
+          logger.warn('⏳ Waiting for you to complete it... (no timeout)');
+          
+          // Wait for user to solve CAPTCHA - no timeout!
+          await page.waitForFunction(
+            () => {
+              const url = window.location.href;
+              const text = document.body.textContent;
+              return !url.includes('/sorry/') && 
+                     !text.includes('unusual traffic') &&
+                     !text.includes('not a robot');
+            },
+            { timeout: 0 } // No timeout - wait forever
+          );
+          
+          logger.success('✓ CAPTCHA solved! Continuing...');
+          await page.waitForTimeout(2000);
+        }
+        
+        captchaDetected = false;
+      }
+      
       // Wait for results to load - try multiple selectors
       const loaded = await Promise.race([
         page.waitForSelector('#search', { timeout: 8000 }).then(() => true).catch(() => false),
@@ -38,7 +71,7 @@ class SearchHandler {
       ]);
       
       if (!loaded) {
-        logger.warn('Search results took longer to load, continuing anyway...');
+        logger.warn('⚠ Search results took longer to load, continuing anyway...');
       }
       
       // Give it a moment to fully load

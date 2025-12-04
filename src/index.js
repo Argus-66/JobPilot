@@ -69,6 +69,20 @@ class JobSearchAutomation {
       logger.success('Initialization complete!');
       logger.separator();
       
+      // Ask user about auto-submit preference
+      const autoSubmitResponse = await userInput.prompt('\n🤖 AUTO-SUBMIT MODE: Should I automatically submit applications without waiting for your review?\n   - YES: Auto-submit all (only stops for CAPTCHAs)\n   - NO: You review and submit each one manually\n\nYour choice (yes/no): ');
+      
+      this.config.autoSubmit = autoSubmitResponse.toLowerCase() === 'yes' || autoSubmitResponse.toLowerCase() === 'y';
+      
+      if (this.config.autoSubmit) {
+        logger.warn('⚠️  AUTO-SUBMIT ENABLED - Applications will be submitted automatically!');
+        logger.warn('⚠️  Make sure your details are correct!');
+      } else {
+        logger.info('✓ Manual review mode - You will review each application before submission');
+      }
+      
+      logger.separator();
+      
       return true;
     } catch (error) {
       logger.error(`Initialization failed: ${error.message}`);
@@ -96,7 +110,16 @@ class JobSearchAutomation {
         );
         
         if (jobLinks.length === 0) {
-          logger.warn('No job links found for this query');
+          logger.warn('⚠ No job links found for this query');
+          
+          // Ask if user wants to continue to next query
+          if (i < this.searchQueries.length - 1) {
+            const shouldContinue = await userInput.prompt('\nNo jobs found. Continue to next search query? (yes/no): ');
+            if (shouldContinue.toLowerCase() !== 'yes' && shouldContinue.toLowerCase() !== 'y') {
+              logger.info('User chose to stop');
+              break;
+            }
+          }
           continue;
         }
         
@@ -113,15 +136,6 @@ class JobSearchAutomation {
           
           if (success) {
             totalApplications++;
-          }
-          
-          // Ask if user wants to continue
-          if (j < jobLinks.length - 1) {
-            const shouldContinue = await userInput.continueToNextJob();
-            if (!shouldContinue) {
-              logger.info('User chose to stop');
-              break;
-            }
           }
         }
         

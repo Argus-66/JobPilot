@@ -1,6 +1,7 @@
 import logger from '../utils/logger.js';
 import userInput from '../utils/user-input.js';
 import FormFiller from './form-filler.js';
+import JobAnalyzer from './job-analyzer.js';
 
 /**
  * Application submitter - handles the job application flow
@@ -11,6 +12,7 @@ class ApplicationSubmitter {
     this.personalDetails = personalDetails;
     this.resumePath = resumePath;
     this.config = config;
+    this.jobAnalyzer = new JobAnalyzer(personalDetails);
   }
 
   async applyToJob(jobLink) {
@@ -28,8 +30,19 @@ class ApplicationSubmitter {
       await jobPage.waitForLoadState('domcontentloaded');
       await jobPage.waitForTimeout(2000);
       
+      // ANALYZE JOB OVERVIEW FIRST
+      logger.info('Analyzing job description...');
+      const analysis = await this.jobAnalyzer.analyzeJobOverview(jobPage);
+      
+      if (!analysis.suitable) {
+        logger.warn(`❌ Skipping job: ${analysis.reason}`);
+        return false;
+      }
+      
+      logger.success('✓ Job is suitable - proceeding with application');
+      
       // Extract job info
-      const jobInfo = await this.extractJobInfo(jobPage);
+      const jobInfo = analysis.jobInfo;
       logger.info(`Company: ${jobInfo.company || 'Unknown'}`);
       logger.info(`Position: ${jobInfo.title || 'Unknown'}`);
       logger.info(`Location: ${jobInfo.location || 'Unknown'}`);
@@ -53,21 +66,25 @@ class ApplicationSubmitter {
           await userInput.waitForCaptcha();
         }
         
-        // Fill the application form
-        await this.fillApplicationForm(jobPage);
+        // Fill the application form with dynamic answers
+        await this.fillApplicationForm(jobPage, analysis);
         
-        // Ask for confirmation before submitting
+        // Handle submission based on auto-submit setting
         if (this.config.autoSubmit) {
-          logger.warn('Auto-submit is enabled - review the form manually');
-        }
-        
-        const shouldSubmit = await userInput.confirmSubmission(jobInfo.title, jobInfo.company);
-        
-        if (shouldSubmit) {
+          // Auto-submit mode - just submit directly
+          logger.warn('🤖 AUTO-SUBMIT MODE - Submitting automatically...');
           await this.submitApplication(jobPage);
-          logger.success('✓ Application submitted successfully!');
+          logger.success('✓ Application auto-submitted!');
         } else {
-          logger.info('Application submission skipped by user');
+          // Manual mode - ask for confirmation
+          const shouldSubmit = await userInput.confirmSubmission(jobInfo.title, jobInfo.company);
+          
+          if (shouldSubmit) {
+            await this.submitApplication(jobPage);
+            logger.success('✓ Application submitted successfully!');
+          } else {
+            logger.info('Application submission skipped by user');
+          }
         }
       } else {
         logger.warn('Could not find apply button on this page');
@@ -159,13 +176,22 @@ class ApplicationSubmitter {
     return null;
   }
 
-  async fillApplicationForm(page) {
+  async fillApplicationForm(page, analysis) {
     logger.info('Filling application form...');
     
     // Wait for form to appear
     await page.waitForTimeout(2000);
     
-    const formFiller = new FormFiller(page, this.personalDetails, this.resumePath);
+    // Create enhanced personal details with dynamic answers
+    const enhancedDetails = {
+      ...this.personalDetails,
+      dynamicAnswers: {
+        whyCompany: analysis.whyWorkHere,
+        companyName: analysis.jobInfo.company
+      }
+    };
+    
+    const formFiller = new FormFiller(page, enhancedDetails, this.resumePath);
     await formFiller.fillForm();
     
     // Check for CAPTCHA again after filling
