@@ -18,7 +18,14 @@ class FormFiller {
     try {
       logger.info('Starting form fill process...');
       
-      // Fill text inputs
+      // UPLOAD RESUME FIRST - so autofill features work
+      await this.uploadResume();
+      
+      // Wait for autofill to potentially work
+      await this.page.waitForTimeout(2000);
+      logger.info('Waiting for any autofill to complete...');
+      
+      // Now fill remaining fields
       await this.fillTextInputs();
       
       // Fill textareas
@@ -29,9 +36,6 @@ class FormFiller {
       
       // Handle checkboxes and radio buttons
       await this.handleCheckboxesAndRadios();
-      
-      // Upload resume
-      await this.uploadResume();
       
       logger.success(`Form filling completed. Filled ${this.filledFields.size} fields.`);
       

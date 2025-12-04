@@ -32,6 +32,13 @@ class ApplicationSubmitter {
       const jobInfo = await this.extractJobInfo(jobPage);
       logger.info(`Company: ${jobInfo.company || 'Unknown'}`);
       logger.info(`Position: ${jobInfo.title || 'Unknown'}`);
+      logger.info(`Location: ${jobInfo.location || 'Unknown'}`);
+      
+      // CRITICAL: Filter by location for non-remote international jobs
+      if (await this.shouldSkipJob(jobInfo, jobPage)) {
+        logger.warn('⚠️  Skipping job - not suitable based on location/type requirements');
+        return false;
+      }
       
       // Look for apply button
       const applyButton = await this.findApplyButton(jobPage);
@@ -100,12 +107,29 @@ class ApplicationSubmitter {
         }
       }
       
+      // Try to extract location
+      let location = null;
+      const locationSelectors = [
+        '[class*="location"]',
+        '[data-test="location"]',
+        '[class*="office"]'
+      ];
+      
+      for (const selector of locationSelectors) {
+        const element = await page.$(selector);
+        if (element) {
+          location = await element.textContent();
+          if (location) break;
+        }
+      }
+      
       return {
         title: title || 'Unknown Position',
-        company: company?.trim() || null
+        company: company?.trim() || null,
+        location: location?.trim() || null
       };
     } catch (error) {
-      return { title: 'Unknown Position', company: null };
+      return { title: 'Unknown Position', company: null, location: null };
     }
   }
 
@@ -154,6 +178,52 @@ class ApplicationSubmitter {
     // This is a placeholder - actual submission is manual for safety
     logger.info('Please review the form and submit manually');
     await userInput.prompt('Press Enter once you have submitted the application...');
+  }
+
+  async shouldSkipJob(jobInfo, page) {
+    try {
+      const pageText = await page.textContent('body');
+      const lowerText = pageText.toLowerCase();
+      const location = (jobInfo.location || '').toLowerCase();
+      
+      // List of countries/regions outside India
+      const internationalLocations = [
+        'usa', 'united states', 'us', 'america', 'san francisco', 'new york', 'california',
+        'uk', 'united kingdom', 'london', 'europe', 'canada', 'toronto', 'vancouver',
+        'australia', 'singapore', 'germany', 'france', 'netherlands'
+      ];
+      
+      // Check if location is international
+      const isInternational = internationalLocations.some(loc => 
+        location.includes(loc) || lowerText.includes(`location: ${loc}`) || lowerText.includes(`office: ${loc}`)
+      );
+      
+      // If international, check if it's remote
+      if (isInternational) {
+        const isRemote = lowerText.includes('remote') || 
+                        lowerText.includes('work from home') || 
+                        lowerText.includes('anywhere');
+        
+        const isHybrid = lowerText.includes('hybrid');
+        const isOnsite = lowerText.includes('on-site') || lowerText.includes('onsite') || lowerText.includes('in-office');
+        
+        if (isHybrid || isOnsite) {
+          logger.warn(`International ${isHybrid ? 'Hybrid' : 'Onsite'} position - You're in India, can't relocate without sponsorship`);
+          return true; // Skip this job
+        }
+        
+        if (!isRemote) {
+          logger.warn('International position with unclear remote status - asking for confirmation');
+          const shouldApply = await userInput.prompt('This appears to be an international position. Continue? (yes/no): ');
+          return shouldApply.toLowerCase() !== 'yes' && shouldApply.toLowerCase() !== 'y';
+        }
+      }
+      
+      return false; // Don't skip
+    } catch (error) {
+      logger.warn('Could not determine location restrictions, continuing...');
+      return false;
+    }
   }
 }
 
